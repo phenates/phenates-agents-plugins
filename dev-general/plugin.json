@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dev-general",
+  "description": "Collection of genral dev tools",
+  "version": "0.1.0",
+  "author": {
+    "name": "phenates"
+  },
+  "repository": "",
+  "license": "MIT",
+  "keywords": [
+    "engineering"
+  ]
+}
