@@ -1,13 +1,13 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "phenates",
+  "name": "phenates plugins",
   "description": "Phenates marketplace for Claude (Code, Desktop) plugins.",
   "owner": {
     "name": "phenates"
   },
   "plugins": [
     {
-      "name": "phenates-agent-plugins",
+      "name": "phenates-agents-plugins",
       "source": "./",
       "description": "Personal Agent Plugin: Reusable portable Agent Plugins 1.0.0 package containing skills, agents, commands, and MCP configurations for multi-platform deployment across Claude Code, Claude Desktop, Hermes Agent, and other compatible agent frameworks.",
       "category": "productivity",

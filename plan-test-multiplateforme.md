@@ -1,4 +1,4 @@
-# Plan de test multi-plateforme — phenates-agent-plugins
+# Plan de test multi-plateforme — phenates-agents-plugins
 
 ## Phase 0 — Pré-requis
 
@@ -24,10 +24,10 @@ Noter l'état "avant" de chaque plateforme (captures ou liste) avant de commence
 /plugin marketplace remove phenates-skills
 
 # Ajouter la nouvelle
-/plugin marketplace add phenates/phenates-agent-plugins
+/plugin marketplace add phenates/phenates-agents-plugins
 
 # Installer le plugin
-/plugin install phenates-agent-plugins@phenates-agent-plugins
+/plugin install phenates-agents-plugins@phenates-agents-plugins
 
 # Vérifier ce qui est détecté
 /plugin
@@ -45,10 +45,10 @@ Test fonctionnel : demander à Claude Code d'éditer un fichier `.canvas` pour v
 
 ```bash
 # Lister ce qui est détecté dans le repo
-npx skills add https://github.com/phenates/phenates-agent-plugins -a claude-code -g --list
+npx skills add https://github.com/phenates/phenates-agents-plugins -a claude-code -g --list
 
 # Installer réellement
-npx skills add https://github.com/phenates/phenates-agent-plugins -a claude-code -g
+npx skills add https://github.com/phenates/phenates-agents-plugins -a claude-code -g
 
 # Vérifier qu'il n'y a pas de résidu de l'ancien nom
 ls ~/.claude/skills/
@@ -64,7 +64,7 @@ Pas de ligne de commande — via l'UI :
 1. **Customize → Plugins → Personal plugins**
 2. Retirer l'ancienne marketplace "Phenates skills"
 3. **+ → Add marketplace → Add from a repository**
-4. Coller : `https://github.com/phenates/phenates-agent-plugins`
+4. Coller : `https://github.com/phenates/phenates-agents-plugins`
 5. Vérifier :
    - Badge "mis à jour il y a..."
    - Nombre de compétences = 5
@@ -83,14 +83,14 @@ Si le sync semble figé sur l'ancienne version : retirer puis ré-ajouter la mar
 hermes skills tap remove phenates/phenates-skills
 
 # Ajouter le nouveau
-hermes skills tap add phenates/phenates-agent-plugins
+hermes skills tap add phenates/phenates-agents-plugins
 
 # Réinstaller chaque skill
-hermes skills install phenates/phenates-agent-plugins/markdown-flavor
-hermes skills install phenates/phenates-agent-plugins/obsidian-vault
-hermes skills install phenates/phenates-agent-plugins/json-canvas
-hermes skills install phenates/phenates-agent-plugins/obsidian-bases
-hermes skills install phenates/phenates-agent-plugins/obsidian-cli
+hermes skills install phenates/phenates-agents-plugins/markdown-flavor
+hermes skills install phenates/phenates-agents-plugins/obsidian-vault
+hermes skills install phenates/phenates-agents-plugins/json-canvas
+hermes skills install phenates/phenates-agents-plugins/obsidian-bases
+hermes skills install phenates/phenates-agents-plugins/obsidian-cli
 
 # Vérification
 hermes skills check
@@ -100,12 +100,12 @@ hermes skills check
 
 ```bash
 # Désactiver le tap natif le temps du test si besoin d'isoler
-hermes skills tap remove phenates/phenates-agent-plugins
+hermes skills tap remove phenates/phenates-agents-plugins
 
 # Installer via le chemin portable Agent Plugins
-hermes plugins install phenates/phenates-agent-plugins --no-enable
+hermes plugins install phenates/phenates-agents-plugins --no-enable
 hermes plugins list
-hermes plugins enable phenates-agent-plugins
+hermes plugins enable phenates-agents-plugins
 
 # Vérification
 hermes plugins doctor
@@ -134,10 +134,10 @@ Comparer manuellement entre les 4 plateformes :
 
 | Plateforme | Commande d'install | Statut | Version détectée | Notes / effets de bord |
 |---|---|---|---|---|
-| Claude Code (CLI) | `/plugin install phenates-agent-plugins@phenates-agent-plugins` | ☐ | | |
-| npx skills (Vercel) | `npx skills add https://github.com/phenates/phenates-agent-plugins` | ☐ | | |
+| Claude Code (CLI) | `/plugin install phenates-agents-plugins@phenates-agents-plugins` | ☐ | | |
+| npx skills (Vercel) | `npx skills add https://github.com/phenates/phenates-agents-plugins` | ☐ | | |
 | Claude Desktop/Cowork | Add marketplace (UI) | ☐ | | |
-| Hermes — tap natif | `hermes skills tap add phenates/phenates-agent-plugins` | ☐ | | |
-| Hermes — portable | `hermes plugins install phenates/phenates-agent-plugins` | ☐ | | |
+| Hermes — tap natif | `hermes skills tap add phenates/phenates-agents-plugins` | ☐ | | |
+| Hermes — portable | `hermes plugins install phenates/phenates-agents-plugins` | ☐ | | |
 
 Une fois rempli, ce tableau alimente directement la section compatibilité du README.

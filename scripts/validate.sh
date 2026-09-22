@@ -12,7 +12,7 @@ NC='\033[0m'
 
 echo ""
 echo "═══════════════════════════════════════════════════"
-echo "   Validating phenates-agent-plugins"
+echo "   Validating phenates-agents-plugins"
 echo "═══════════════════════════════════════════════════"
 echo ""
 
