@@ -6,3 +6,7 @@ desktop.ini
 # Editors
 .vscode/
 *.swp
+
+# Agents
+.claude/
+.kil/
