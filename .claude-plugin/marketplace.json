@@ -8,28 +8,32 @@
   "plugins": [
     {
       "name": "markdown-obsidian-toolkit",
+      "description": "Markdown notes and Obsidian skills collection for writing, reading, and organizing notes. (Agent Plugins 1.0.0) Markdown and Obsidian Flavored style (wikilinks, embeds, callouts, properties), vault MCP access, Obsidian CLI, Bases (.base), and JSON Canvas (.canvas). Portable across Claude Code, Claude Desktop, and compatible agent frameworks.",
       "source": "./markdown-obsidian-toolkit",
+      "category": "productivity",
+      "author": {
+        "name": "phenates"
+      },
       "skills": [
         "./skills/json-canvas",
         "./skills/markdown-flavor",
         "./skills/obsidian-bases",
         "./skills/obsidian-cli",
         "./skills/obsidian-vault"
-      ],
-      "description": "Markdown notes and Obsidian skills collection for writing, reading, and organizing notes. (Agent Plugins 1.0.0) Markdown and Obsidian Flavored style (wikilinks, embeds, callouts, properties), vault MCP access, Obsidian CLI, Bases (.base), and JSON Canvas (.canvas). Portable across Claude Code, Claude Desktop, and compatible agent frameworks.",
-      "category": "productivity",
-      "author": {
-        "name": "phenates"
-      }
+      ]
     },
     {
       "name": "dev-general",
-      "source": "./dev-general",
       "description": "Collection of genral dev tools",
+      "source": "./dev-general",
       "category": "productivity",
       "author": {
         "name": "phenates"
-      }
+      },
+      "skills": [
+        "./skills/code-explain",
+        "./skills/doc-generate"
+      ]
     }
   ]
 }
