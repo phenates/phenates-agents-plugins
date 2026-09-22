@@ -21,6 +21,15 @@
       "author": {
         "name": "phenates"
       }
+    },
+    {
+      "name": "dev-general",
+      "source": "./dev-general",
+      "description": "Collection of genral dev tools",
+      "category": "productivity",
+      "author": {
+        "name": "phenates"
+      }
     }
   ]
 }
