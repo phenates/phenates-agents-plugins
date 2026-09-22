@@ -7,24 +7,29 @@ compatible frameworks) and published through a single Claude Code marketplace.
 The repository itself is **not** a plugin. Every folder that contains a `plugin.json` is a plugin in
 its own right: it is validated, installed, versioned, and released independently of the others.
 
+## Ref documentation
+
+- https://code.claude.com/docs/fr/plugins-reference
+- https://agent-plugins.org/
+
 ## Plugins in this repository
 
-| Plugin                                                        | Purpose                                             | Skills | Version | Status      |
-| ------------------------------------------------------------- | --------------------------------------------------- | ------ | ------- | ----------- |
-| [`markdown-obsidian-toolkit`](markdown-obsidian-toolkit)       | Markdown notes and Obsidian knowledge artifacts      | 5      | `0.1.1` | ✅ Tested   |
-| [`dev-general`](dev-general)                                   | General development tooling                          | 2      | `0.1.0` | ✅ Tested   |
+| Plugin                                                   | Purpose                                         | Skills | Version | Status    |
+| -------------------------------------------------------- | ----------------------------------------------- | ------ | ------- | --------- |
+| [`markdown-obsidian-toolkit`](markdown-obsidian-toolkit) | Markdown notes and Obsidian knowledge artifacts | 5      | `0.1.1` | ✅ Tested |
+| [`dev-general`](dev-general)                             | General development tooling                     | 2      | `0.1.0` | ✅ Tested |
 
 ### Skills
 
-| Skill                                                                        | Plugin                     | Version | Origin                            |
-| ---------------------------------------------------------------------------- | -------------------------- | ------- | --------------------------------- |
-| [`markdown-flavor`](markdown-obsidian-toolkit/skills/markdown-flavor)         | markdown-obsidian-toolkit  | `0.1.0` | This repository                   |
-| [`obsidian-vault`](markdown-obsidian-toolkit/skills/obsidian-vault)           | markdown-obsidian-toolkit  | `0.1.0` | This repository                   |
-| [`json-canvas`](markdown-obsidian-toolkit/skills/json-canvas)                 | markdown-obsidian-toolkit  | —       | Vendored (kepano, unmodified)     |
-| [`obsidian-bases`](markdown-obsidian-toolkit/skills/obsidian-bases)           | markdown-obsidian-toolkit  | —       | Vendored (kepano, unmodified)     |
-| [`obsidian-cli`](markdown-obsidian-toolkit/skills/obsidian-cli)               | markdown-obsidian-toolkit  | —       | Vendored (kepano, not adopted)    |
-| [`code-explain`](dev-general/skills/code-explain)                             | dev-general                | —       | This repository                   |
-| [`doc-generate`](dev-general/skills/doc-generate)                             | dev-general                | —       | This repository                   |
+| Skill                                                                 | Plugin                    | Version | Origin                         |
+| --------------------------------------------------------------------- | ------------------------- | ------- | ------------------------------ |
+| [`markdown-flavor`](markdown-obsidian-toolkit/skills/markdown-flavor) | markdown-obsidian-toolkit | `0.1.0` | This repository                |
+| [`obsidian-vault`](markdown-obsidian-toolkit/skills/obsidian-vault)   | markdown-obsidian-toolkit | `0.1.0` | This repository                |
+| [`json-canvas`](markdown-obsidian-toolkit/skills/json-canvas)         | markdown-obsidian-toolkit | —       | Vendored (kepano, unmodified)  |
+| [`obsidian-bases`](markdown-obsidian-toolkit/skills/obsidian-bases)   | markdown-obsidian-toolkit | —       | Vendored (kepano, unmodified)  |
+| [`obsidian-cli`](markdown-obsidian-toolkit/skills/obsidian-cli)       | markdown-obsidian-toolkit | —       | Vendored (kepano, not adopted) |
+| [`code-explain`](dev-general/skills/code-explain)                     | dev-general               | —       | This repository                |
+| [`doc-generate`](dev-general/skills/doc-generate)                     | dev-general               | —       | This repository                |
 
 Skills that carry no `version` in their frontmatter are not versioned individually: vendored skills
 stay untouched by design, and new plugins may adopt per-skill versions later.
@@ -135,10 +140,7 @@ A single marketplace named `phenates-plugins`, with one entry per plugin:
 {
   "name": "markdown-obsidian-toolkit",
   "source": "./markdown-obsidian-toolkit",
-  "skills": [
-    "./skills/json-canvas",
-    "./skills/markdown-flavor"
-  ],
+  "skills": ["./skills/json-canvas", "./skills/markdown-flavor"],
   "description": "…",
   "category": "productivity",
   "author": { "name": "phenates" }
@@ -146,7 +148,7 @@ A single marketplace named `phenates-plugins`, with one entry per plugin:
 ```
 
 - `name` is both the plugin identifier for Claude Code and the **group label** shown in the npx
-  skills picker (`markdown-obsidian-toolkit` renders as *Markdown Obsidian Toolkit*).
+  skills picker (`markdown-obsidian-toolkit` renders as _Markdown Obsidian Toolkit_).
 - `source` is the plugin directory, relative to the repository root.
 - `skills` lists each skill directory of the plugin, relative to the plugin root.
 
@@ -246,8 +248,8 @@ not exist yet.
 
 ### Distribution behaviour
 
-| Platform           | Version behaviour                                            |
-| ------------------ | ------------------------------------------------------------ |
+| Platform           | Version behaviour                                             |
+| ------------------ | ------------------------------------------------------------- |
 | Claude Code        | Follows the repository, one plugin per marketplace entry      |
 | Claude Desktop     | Follows GitHub updates automatically through the plugin entry |
 | Hermes (`tap add`) | Reads each skill's version individually                       |

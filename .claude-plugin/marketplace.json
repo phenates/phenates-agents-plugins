@@ -5,6 +5,7 @@
   "owner": {
     "name": "phenates"
   },
+  "version": "0.1.0",
   "plugins": [
     {
       "name": "markdown-obsidian-toolkit",
@@ -24,7 +25,7 @@
     },
     {
       "name": "dev-general",
-      "description": "Collection of genral dev tools",
+      "description": "General dev tools: code-explain, doc-generate.",
       "source": "./dev-general",
       "category": "productivity",
       "author": {

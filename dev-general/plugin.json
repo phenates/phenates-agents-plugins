@@ -1,12 +1,12 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dev-general",
-  "description": "Collection of genral dev tools",
+  "description": "General dev tools: code-explain, doc-generate.",
   "version": "0.1.0",
   "author": {
     "name": "phenates"
   },
-  "repository": "",
+  "repository": "https://github.com/phenates/phenates-agents-plugins/tree/main/dev-general",
   "license": "MIT",
   "keywords": [
     "engineering"
