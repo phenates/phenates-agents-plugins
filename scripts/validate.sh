@@ -1,4 +1,17 @@
 #!/usr/bin/env bash
+#
+# validate.sh — Validate every plugin of this repository against the supported targets.
+#
+# This repository is a plugin store, not a plugin itself: a plugin is any directory
+# containing a plugin.json outside .claude-plugin/, and each one is validated
+# independently. Details are printed only when a check fails.
+#
+# Targets:
+#   1. Agent Plugins 1.0.0  — doctor + builder, once per plugin directory
+#   2. Claude Code          — marketplace manifest at the repository root
+#
+# Usage: bash scripts/validate.sh
+
 set -e
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -16,34 +29,57 @@ echo "   Validating phenates-agents-plugins"
 echo "═══════════════════════════════════════════════════"
 echo ""
 
-# Validation 1a : Agent Plugins doctor check
-echo -e "${YELLOW}→ Checking Agent Plugins 1.0.0 (doctor)...${NC}"
-if npx @hiai-gg/agent-plugins-doctor check "$REPO_ROOT" 2>/dev/null; then
-  echo -e "${GREEN}✓ Doctor check passed${NC}"
-else
-  echo -e "${RED}✗ Doctor check failed${NC}"
-  EXIT_CODE=1
+# Discover plugin directories: every plugin.json that is not a Claude Code manifest.
+# Read line by line so repository paths containing spaces survive.
+PLUGIN_DIRS=()
+while IFS= read -r PLUGIN_DIR; do
+  [ -n "$PLUGIN_DIR" ] && PLUGIN_DIRS+=("$PLUGIN_DIR")
+done < <(find "$REPO_ROOT" \
+  \( -name .git -o -name node_modules \) -prune -o \
+  -name plugin.json -not -path "*/.claude-plugin/*" -print0 \
+  | xargs -0 -r -n1 dirname | sort -u)
+
+if [ ${#PLUGIN_DIRS[@]} -eq 0 ]; then
+  echo -e "${RED}✗ No plugin found: no plugin.json outside .claude-plugin/${NC}"
+  exit 1
 fi
 
+echo -e "${YELLOW}Plugins found: ${#PLUGIN_DIRS[@]}${NC}"
 echo ""
 
-# Validation 1b : Agent Plugins builder inspect
-echo -e "${YELLOW}→ Inspecting Agent Plugins 1.0.0 (builder)...${NC}"
-if npx @hiai-gg/agent-plugins-builder inspect "$REPO_ROOT" 2>/dev/null; then
-  echo -e "${GREEN}✓ Builder inspection passed${NC}"
-else
-  echo -e "${RED}✗ Builder inspection failed${NC}"
-  EXIT_CODE=1
-fi
+for PLUGIN_DIR in "${PLUGIN_DIRS[@]}"; do
+  PLUGIN_NAME="${PLUGIN_DIR#$REPO_ROOT/}"
 
-echo ""
+  # Validation 1a : Agent Plugins doctor check
+  echo -e "${YELLOW}→ ${PLUGIN_NAME} — Agent Plugins 1.0.0 (doctor)...${NC}"
+  if OUTPUT=$(npx @hiai-gg/agent-plugins-doctor check "$PLUGIN_DIR" 2>&1); then
+    echo -e "${GREEN}  ✓ Doctor check passed${NC}"
+  else
+    echo "$OUTPUT"
+    echo -e "${RED}  ✗ Doctor check failed${NC}"
+    EXIT_CODE=1
+  fi
 
-# Validation 2 : Claude Code native via claude CLI
-echo -e "${YELLOW}→ Checking Claude Code plugin...${NC}"
-if claude plugin validate --strict "$REPO_ROOT" 2>/dev/null; then
-  echo -e "${GREEN}✓ Claude Code validation passed${NC}"
+  # Validation 1b : Agent Plugins builder inspect
+  echo -e "${YELLOW}→ ${PLUGIN_NAME} — Agent Plugins 1.0.0 (builder)...${NC}"
+  if OUTPUT=$(npx @hiai-gg/agent-plugins-builder inspect "$PLUGIN_DIR" 2>&1); then
+    echo -e "${GREEN}  ✓ Builder inspection passed${NC}"
+  else
+    echo "$OUTPUT"
+    echo -e "${RED}  ✗ Builder inspection failed${NC}"
+    EXIT_CODE=1
+  fi
+
+  echo ""
+done
+
+# Validation 2 : Claude Code marketplace via claude CLI
+echo -e "${YELLOW}→ Marketplace — Claude Code...${NC}"
+if OUTPUT=$(claude plugin validate --strict "$REPO_ROOT" 2>&1); then
+  echo -e "${GREEN}  ✓ Claude Code validation passed${NC}"
 else
-  echo -e "${RED}✗ Claude Code validation failed${NC}"
+  echo "$OUTPUT"
+  echo -e "${RED}  ✗ Claude Code validation failed${NC}"
   EXIT_CODE=1
 fi
 
