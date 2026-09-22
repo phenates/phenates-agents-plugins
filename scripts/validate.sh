@@ -9,6 +9,7 @@
 # Targets:
 #   1. Agent Plugins 1.0.0  — doctor + builder, once per plugin directory
 #   2. Claude Code          — marketplace manifest at the repository root
+#   3. Skills               — frontmatter and marketplace declaration, via check_skills.py
 #
 # Usage: bash scripts/validate.sh
 
@@ -73,7 +74,25 @@ for PLUGIN_DIR in "${PLUGIN_DIRS[@]}"; do
   echo ""
 done
 
-# Validation 2 : Claude Code marketplace via claude CLI
+# Validation 2 : skill frontmatter and marketplace consistency
+# Warnings are printed even on success: they point at skills the picker will not offer.
+echo -e "${YELLOW}→ Skills — frontmatter and marketplace consistency...${NC}"
+PYTHON="$(command -v python3 || command -v python || true)"
+if [ -z "$PYTHON" ]; then
+  echo -e "${RED}  ✗ python not found: cannot run scripts/check_skills.py${NC}"
+  EXIT_CODE=1
+elif OUTPUT=$("$PYTHON" "$REPO_ROOT/scripts/check_skills.py" "$REPO_ROOT" 2>&1); then
+  echo "$OUTPUT"
+  echo -e "${GREEN}  ✓ Skills check passed${NC}"
+else
+  echo "$OUTPUT"
+  echo -e "${RED}  ✗ Skills check failed${NC}"
+  EXIT_CODE=1
+fi
+
+echo ""
+
+# Validation 3 : Claude Code marketplace via claude CLI
 echo -e "${YELLOW}→ Marketplace — Claude Code...${NC}"
 if OUTPUT=$(claude plugin validate --strict "$REPO_ROOT" 2>&1); then
   echo -e "${GREEN}  ✓ Claude Code validation passed${NC}"
