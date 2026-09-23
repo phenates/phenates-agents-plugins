@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "obsidian-vault-test",
+  "version": "0.1.0",
+  "description": "Test — plugin.json imbriqué dans une skill pour vérifier la propagation via npx skills"
+}
