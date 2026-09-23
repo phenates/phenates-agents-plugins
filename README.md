@@ -11,6 +11,7 @@ its own right: it is validated, installed, versioned, and released independently
 
 - https://code.claude.com/docs/fr/plugins-reference
 - https://agent-plugins.org/
+- https://agentskills.io/home
 
 ## Plugins in this repository
 
