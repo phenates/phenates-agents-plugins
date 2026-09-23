@@ -98,6 +98,15 @@ Claude Code, and loaded as a plain skill — extras silently ignored — in Kilo
 | **Hermes Agent**                     | Native tap or portable Agent Plugins install                                                                              | 🔶 Portable format ready |
 | **Generic Agent Plugins 1.0 client** | Point it at a plugin folder                                                                                               | ✅ Compliant             |
 
+> **Claude Desktop's "Personnaliser" tab.** Skills installed here through `npx skills` are fully
+> loaded and usable (slash commands work, the runtime picks them up from `~/.claude/skills/`), but
+> they will **not** appear in Claude Desktop's built-in "Personnaliser → Les vôtres" list. That tab
+> only reflects `~/.claude/plugins/installed_plugins.json`, populated exclusively by
+> `claude plugin install <name>@<marketplace>` — a separate registry that `npx skills` never
+> touches, by design (see [Why installation goes only through npx
+> skills](#why-installation-goes-only-through-npx-skills)). This is expected, not a bug: adding
+> `claude plugin install` as a second path would reintroduce the moving-install-path problem this
+> repo exists to avoid.
 ## Installation
 
 Everything goes through `npx skills`. No other install path is supported.

@@ -14,14 +14,7 @@
       "category": "productivity",
       "author": {
         "name": "phenates"
-      },
-      "skills": [
-        "./skills/json-canvas",
-        "./skills/markdown-flavor",
-        "./skills/obsidian-bases",
-        "./skills/obsidian-cli",
-        "./skills/obsidian-vault"
-      ]
+      }
     },
     {
       "name": "dev-general",
@@ -30,11 +23,7 @@
       "category": "productivity",
       "author": {
         "name": "phenates"
-      },
-      "skills": [
-        "./skills/code-explain",
-        "./skills/doc-generate"
-      ]
+      }
     }
   ]
 }
